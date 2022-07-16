@@ -3,6 +3,11 @@ const inputEl = document.getElementById("input-el");
 const inputBtn = document.getElementById("input-btn");
 const ulEl = document.getElementById("ul-el");
 
+//localStorage.setItem("myLeads", "google.com");
+
+let name = localStorage.getItem("myLeads");
+
+
 
 inputBtn.addEventListener("click", function() {
     
@@ -18,7 +23,7 @@ function renderLeads() {
 
     let listItems = '';
     for (let i = 0; i < myLeads.length; i++) {
-      
+        //listItems += "<li><a target='_blank' href='" + myLeads[i] + "'>" + myLeads[i] + "</a></li>"
         
         listItems += `
         <li>
