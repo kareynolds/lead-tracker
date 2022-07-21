@@ -2,46 +2,58 @@ let myLeads = []
 const inputEl = document.getElementById("input-el")
 const inputBtn = document.getElementById("input-btn")
 const ulEl = document.getElementById("ul-el")
-const deleteBtn = document.getElementById("delete-btn");
-
-
-
-const leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"));
+const deleteBtn = document.getElementById("delete-btn")
+const leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"))
+const tabBtn = document.getElementById("tab-btn")
 
 console.log(leadsFromLocalStorage)
-
 // Check if leadsFromLocalStorage is truthy
 // If so, set myLeads to its value and call renderLeads()
 
 if (leadsFromLocalStorage) {
     myLeads = leadsFromLocalStorage
-    renderLeads()
+    render(myLeads)
 } else {
-    console.log("No local storage datq")
+    console.log("No local storage data")
 }
 
+
+
 inputBtn.addEventListener("click", function() {
+
     myLeads.push(inputEl.value)
     inputEl.value = ""
     localStorage.setItem("myLeads", JSON.stringify(myLeads) )
-    renderLeads()
+    render(myLeads)
 
 })
 
 deleteBtn.addEventListener("dblclick", function(){
     myLeads = [];
     localStorage.clear();
-    renderLeads();
+    render(myLeads);
     
 })
 
-function renderLeads() {
+tabBtn.addEventListener("dblclick", function() {
+    
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
+        myLeads.push(tabs[0].url);
+        localStroage.setItem("myLeads", JSON.stringify(myLeads));
+        render(myLeads)
+    })
+
+})
+
+
+
+function render(leads) {
     let listItems = ""
-    for (let i = 0; i < myLeads.length; i++) {
+    for (let i = 0; i < leads.length; i++) {
         listItems += `
             <li>
-                <a target='_blank' href='${myLeads[i]}'>
-                    ${myLeads[i]}
+                <a target='_blank' href='${leads[i]}'>
+                    ${leads[i]}
                 </a>
             </li>
         `
