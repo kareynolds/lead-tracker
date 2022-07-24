@@ -35,15 +35,6 @@ deleteBtn.addEventListener("dblclick", function(){
     
 })
 
-tabBtn.addEventListener("dblclick", function() {
-    
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
-        myLeads.push(tabs[0].url);
-        localStroage.setItem("myLeads", JSON.stringify(myLeads));
-        render(myLeads)
-    })
-
-})
 
 
 
@@ -52,9 +43,7 @@ function render(leads) {
     for (let i = 0; i < leads.length; i++) {
         listItems += `
             <li>
-                <a target='_blank' href='${leads[i]}'>
                     ${leads[i]}
-                </a>
             </li>
         `
     }

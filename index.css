@@ -5,7 +5,7 @@ body {
     min-width: 400px;
 }
 
-input {
+textarea {
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
