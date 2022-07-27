@@ -7,8 +7,7 @@ const leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"))
 const tabBtn = document.getElementById("tab-btn")
 
 console.log(leadsFromLocalStorage)
-// Check if leadsFromLocalStorage is truthy
-// If so, set myLeads to its value and call renderLeads()
+
 
 if (leadsFromLocalStorage) {
     myLeads = leadsFromLocalStorage
@@ -49,3 +48,23 @@ function render(leads) {
     }
     ulEl.innerHTML = listItems  
 }
+
+
+
+
+const emailBtn = document.getElementById("email-btn")
+
+emailBtn.addEventListener("dblclick", function() {
+    let emailAddress = prompt("Enter the email address to send the notes to:")
+    const sendMail = () => {
+        const link =
+          "mailto:" + emailAddress +
+          "?subject=" +
+          encodeURIComponent("Lead Notes:") +
+          "&body=" +
+          encodeURIComponent(myLeads.join('\n'));
+        window.location.href = link;
+      };
+      sendMail();
+})
+
